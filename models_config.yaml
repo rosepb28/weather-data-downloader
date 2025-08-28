@@ -1,0 +1,112 @@
+# Technical configuration for weather model providers
+# This file contains the inherent characteristics of each model
+# DO NOT modify for user preferences - use config.yaml instead
+
+models:
+  gfs.0p25:
+    name: "GFS 0.25 Degree"
+    resolution: "0.25"
+    base_url: "https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25_1hr.pl"
+    download_format: "grib2"  # Format as downloaded from source
+    file_extension: ".grb2"   # File extension as provided by source (may vary)
+    final_format: "netcDF"    # Format after processing
+    forecast_frequency: 3  # hours between forecast steps
+    max_forecast_hours: 231
+    
+    # Available forecast cycles (UTC)
+    cycles: ["00", "06", "12", "18"]
+    
+    # Forecast hour ranges with frequencies for each cycle
+    # Format: {cycle: [[start, end, frequency]]}
+    cycle_forecast_ranges:
+      "00": [
+        [0, 120, 1],    # 0h to 120h: every 1 hour
+        [123, 231, 3]   # 123h to 231h: every 3 hours
+      ]
+      "06": [
+        [0, 120, 1],    # 0h to 120h: every 1 hour
+        [123, 231, 3]   # 123h to 231h: every 3 hours
+      ]
+      "12": [
+        [0, 120, 1],    # 0h to 120h: every 1 hour
+        [123, 231, 3]   # 123h to 231h: every 3 hours
+      ]
+      "18": [
+        [0, 120, 1],    # 0h to 120h: every 1 hour
+        [123, 231, 3]   # 123h to 231h: every 3 hours
+      ]
+    
+    # Availability delays (hours after cycle time when data becomes available)
+    availability_delays:
+      short_range: 4    # 0-24h forecasts available 4h after cycle
+      medium_range: 6   # 25-48h forecasts available 6h after cycle  
+      long_range: 12    # 49h+ forecasts available 12h after cycle
+
+  ecmwf.0p25:
+    name: "ECMWF 0.25 Degree"
+    resolution: "0.25"
+    base_url: "https://api.ecmwf.int/v1"
+    download_format: "grib2"  # Format as downloaded from source
+    file_extension: ".grb2"   # File extension for downloaded files
+    final_format: "netcdf"    # Format after processing
+    forecast_frequency: 6  # hours between forecast steps
+    max_forecast_hours: 144
+    
+    # Available forecast cycles (UTC)
+    cycles: ["00", "06", "12", "18"]
+    
+    # Forecast hour ranges with frequencies for each cycle
+    # Format: {cycle: [{"start": X, "end": Y, "frequency": Z}]}
+    cycle_forecast_ranges:
+      "00": [
+        {"start": 0, "end": 144, "frequency": 6}     # 0h to 144h: every 6 hours
+      ]
+      "06": [
+        {"start": 0, "end": 144, "frequency": 6}     # 0h to 144h: every 6 hours
+      ]
+      "12": [
+        {"start": 0, "end": 144, "frequency": 6}     # 0h to 144h: every 6 hours
+      ]
+      "18": [
+        {"start": 0, "end": 144, "frequency": 6}     # 0h to 144h: every 6 hours
+      ]
+    
+    # Availability delays
+    availability_delays:
+      short_range: 6    # 0-48h forecasts available 6h after cycle
+      medium_range: 12  # 49h+ forecasts available 12h after cycle
+
+  gem.0p1:
+    name: "GEM 0.1 Degree"
+    resolution: "0.1"
+    base_url: "https://dd.weather.gc.ca/model_gem_global/10km"
+    download_format: "grib2"  # Format as downloaded from source
+    file_extension: ".grb2"   # File extension for downloaded files
+    final_format: "netcdf"    # Format after processing
+    forecast_frequency: 3  # hours between forecast steps
+    max_forecast_hours: 168
+    
+    # Available forecast cycles (UTC)
+    cycles: ["00", "06", "12", "18"]
+    
+    # Forecast hour ranges with frequencies for each cycle
+    # Format: {cycle: [{"start": X, "end": Y, "frequency": Z}]}
+    cycle_forecast_ranges:
+      "00": [
+        {"start": 0, "end": 168, "frequency": 3}     # 0h to 168h: every 3 hours
+      ]
+      "06": [
+        {"start": 0, "end": 168, "frequency": 3}     # 0h to 168h: every 3 hours
+      ]
+      "12": [
+        {"start": 0, "end": 168, "frequency": 3}     # 0h to 168h: every 3 hours
+      ]
+      "18": [
+        {"start": 0, "end": 168, "frequency": 3}     # 0h to 168h: every 3 hours
+      ]
+    
+    # Availability delays
+    availability_delays:
+      short_range: 4    # 0-24h forecasts available 4h after cycle
+      medium_range: 6   # 25-72h forecasts available 6h after cycle
+      long_range: 8     # 73h+ forecasts available 8h after cycle

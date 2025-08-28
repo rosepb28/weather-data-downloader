@@ -1,0 +1,78 @@
+# Weather Data Downloader Configuration
+# This file contains user preferences for downloading and processing weather data.
+# Model-specific technical characteristics are defined in models_config.yaml
+
+# ============================================================================
+# UNIVERSAL SETTINGS (applied to all models)
+# ============================================================================
+
+# Output directory (modify as needed: data, tmp/data, /path/to/storage)
+output_dir: "data"
+
+# Spatial bounds for data download/processing (South America)
+spatial_bounds:
+  lon_min: -90.0    # Minimum longitude (West)
+  lon_max: -30.0    # Maximum longitude (East)  
+  lat_min: -60.0    # Minimum latitude (South)
+  lat_max: 15.0     # Maximum latitude (North)
+
+# Processing options (applied to all models)
+processing:
+  target_frequency: "1H"  # Target frequency for interpolation
+  
+  # Performance settings
+  workers: 2
+  chunk_size: "100MB"
+  
+  # Compression settings
+  compression:
+    enabled: true
+    level: 5  # 1-9, higher = better compression but slower
+    
+  # NetCDF optimization
+  netcdf:
+    chunking: true
+    shuffle: true
+    fletcher32: true
+
+# Download settings
+download:
+  max_concurrent: 4
+  max_retries: 3
+  retry_delay: 2  # seconds
+  timeout: 300   # seconds
+
+# ============================================================================
+# MODEL-SPECIFIC SETTINGS
+# ============================================================================
+
+models:
+  gfs.0p25:
+    # Variables to download (using standard names)
+    variables: ["t2m", "rh2m", "u10m", "v10m", "hgt"]
+    
+    # Levels to download
+    levels: ["surface", "2_m_above_ground", "10_m_above_ground"]
+    
+    # Output filename prefix
+    out_file: "gfs.0p25"
+    
+  ecmwf.0p25:
+    # Variables to download (using standard names)
+    variables: ["t2m", "rh2m", "u10m", "v10m", "hgt", "msl"]
+    
+    # Levels to download
+    levels: ["surface", "2_m_above_ground", "10_m_above_ground"]
+    
+    # Output filename prefix
+    out_file: "ecmwf.0p25"
+    
+  gem.0p1:
+    # Variables to download (using standard names)
+    variables: ["t2m", "rh2m", "u10m", "v10m", "hgt"]
+    
+    # Levels to download
+    levels: ["surface", "2_m_above_ground", "10_m_above_ground"]
+    
+    # Output filename prefix
+    out_file: "gem.0p1"

@@ -1,0 +1,83 @@
+# Variables Mapping Configuration
+# Maps standard short names to model-specific codes
+
+standard_variables:
+  t2m:
+    description: "2-meter temperature"
+    units: "K"
+    gfs: "TMP"
+    ecmwf: "2t"
+    gem: "TT"
+    levels: ["2_m_above_ground"]
+  
+  rh2m:
+    description: "2-meter relative humidity"
+    units: "%"
+    gfs: "RH"
+    ecmwf: "r"
+    gem: "HU"
+    levels: ["2_m_above_ground"]
+  
+  u10m:
+    description: "10-meter U-component of wind"
+    units: "m/s"
+    gfs: "UGRD"
+    ecmwf: "10u"
+    gem: "UU"
+    levels: ["10_m_above_ground"]
+  
+  v10m:
+    description: "10-meter V-component of wind"
+    units: "m/s"
+    gfs: "VGRD"
+    ecmwf: "10v"
+    gem: "VV"
+    levels: ["10_m_above_ground"]
+  
+  hgt:
+    description: "Geopotential height"
+    units: "gpm"
+    gfs: "HGT"
+    ecmwf: "z"
+    gem: "GZ"
+    levels: ["surface", "1000_mb", "850_mb", "500_mb"]
+  
+  pres:
+    description: "Surface pressure"
+    units: "Pa"
+    gfs: "PRES"
+    ecmwf: "sp"
+    gem: "P0"
+    levels: ["surface"]
+  
+  tcdc:
+    description: "Total cloud cover"
+    units: "%"
+    gfs: "TCDC"
+    ecmwf: "tcc"
+    gem: "N0"
+    levels: ["surface"]
+  
+  apcp:
+    description: "Total precipitation"
+    units: "kg/m²"
+    gfs: "APCP"
+    ecmwf: "tp"
+    gem: "PR"
+    levels: ["surface"]
+  
+  cape:
+    description: "Convective available potential energy"
+    units: "J/kg"
+    gfs: "CAPE"
+    ecmwf: "cape"
+    gem: "CAPE"
+    levels: ["surface"]
+  
+  cin:
+    description: "Convective inhibition"
+    units: "J/kg"
+    gfs: "CIN"
+    ecmwf: "cin"
+    gem: "CIN"
+    levels: ["surface"]
