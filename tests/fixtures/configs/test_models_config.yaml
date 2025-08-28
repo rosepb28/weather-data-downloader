@@ -1,0 +1,56 @@
+# Test models configuration file
+# Defines technical characteristics of weather models for testing
+
+gfs.0p25:
+  name: "GFS 0.25 Degree"
+  resolution: "0.25°"
+  base_url: "https://nomads.ncep.noaa.gov"
+  data_source: "NOMADS"
+  
+  # Available forecast cycles
+  cycles: ["00", "06", "12", "18"]
+  
+  # Forecast ranges for each cycle [start, end, frequency]
+  cycle_forecast_ranges:
+    "00": [[0, 120, 1], [123, 240, 3]]  # 0-120h: every 1h, 123-240h: every 3h
+    "06": [[0, 120, 1], [123, 240, 3]]
+    "12": [[0, 120, 1], [123, 240, 3]]
+    "18": [[0, 120, 1], [123, 240, 3]]
+  
+  # Maximum forecast hours available
+  max_forecast_hours: 240
+  
+  # Availability delays (minutes after cycle time)
+  availability_delays:
+    "00": 300  # 5 hours
+    "06": 300
+    "12": 300
+    "18": 300
+  
+  # File format information
+  download_format: "grib2"
+  file_extension: ".grb2"
+  final_format: "netcdf"
+
+# Test model for unit tests
+test.model:
+  name: "Test Model"
+  resolution: "1.0°"
+  base_url: "https://test.example.com"
+  data_source: "TEST"
+  
+  cycles: ["00", "12"]
+  
+  cycle_forecast_ranges:
+    "00": [[0, 72, 1]]   # Simple hourly for 3 days
+    "12": [[0, 72, 1]]
+  
+  max_forecast_hours: 72
+  
+  availability_delays:
+    "00": 60
+    "12": 60
+  
+  download_format: "grib2"
+  file_extension: ".grb2"
+  final_format: "netcdf"
