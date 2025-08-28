@@ -1,0 +1,53 @@
+# Test variables mapping configuration
+# Maps standard variable names to model-specific codes
+
+# Standard variable definitions
+standard_variables:
+  t2m:
+    description: "2-meter Temperature"
+    units: "K"
+    long_name: "Temperature at 2 meters above surface"
+  
+  rh2m:
+    description: "2-meter Relative Humidity" 
+    units: "%"
+    long_name: "Relative humidity at 2 meters above surface"
+  
+  u10m:
+    description: "10-meter U Wind Component"
+    units: "m/s"
+    long_name: "Eastward wind component at 10 meters above surface"
+  
+  v10m:
+    description: "10-meter V Wind Component"
+    units: "m/s"
+    long_name: "Northward wind component at 10 meters above surface"
+  
+  hgt:
+    description: "Surface Height"
+    units: "m"
+    long_name: "Surface geopotential height"
+  
+  msl:
+    description: "Mean Sea Level Pressure"
+    units: "Pa"
+    long_name: "Pressure reduced to mean sea level"
+
+# Model-specific variable mappings
+model_mappings:
+  gfs:
+    # GFS uses these parameter names
+    t2m: "TMP"      # Temperature
+    rh2m: "RH"      # Relative humidity  
+    u10m: "UGRD"    # U-component wind
+    v10m: "VGRD"    # V-component wind
+    hgt: "HGT"      # Geopotential height
+    msl: "PRMSL"    # Pressure reduced to MSL
+  
+  test:
+    # Test model mapping (simplified)
+    t2m: "TEMP"
+    rh2m: "HUMID"
+    u10m: "UWIND"
+    v10m: "VWIND"
+    hgt: "HEIGHT"

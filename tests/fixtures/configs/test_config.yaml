@@ -1,0 +1,40 @@
+# Test configuration file for weather-data-downloader
+# Used in unit and integration tests
+
+# Universal settings (apply to all models)
+output_dir: "test_data"
+
+spatial_bounds:
+  lon_min: -90.0    # South America bounds
+  lon_max: -30.0
+  lat_min: -60.0
+  lat_max: 15.0
+
+processing:
+  target_frequency: "1H"  # Always interpolate to hourly
+  workers: 2
+  chunk_size: "50MB"  # Smaller chunks for testing
+  compression:
+    enabled: true
+    level: 5
+  netcdf:
+    chunking: true
+    shuffle: true
+    fletcher32: true
+
+download:
+  retry_attempts: 2  # Fewer retries for testing
+  timeout: 10        # Shorter timeout for testing
+  concurrent_downloads: 2
+
+# Model-specific settings
+models:
+  gfs.0p25:
+    variables: ["t2m", "rh2m", "u10m", "v10m", "hgt"]
+    levels: ["surface", "2_m_above_ground", "10_m_above_ground"]
+    out_file: "gfs.0p25"
+  
+  test.model:
+    variables: ["t2m", "rh2m"]
+    levels: ["surface"]
+    out_file: "test"
